@@ -2,7 +2,7 @@
   "name": "@jiaminghi/bezierCurve",
   "version": "0.0.1",
   "author": "JiaMing <743192023@qq.com>",
-  "description": "Bezier curve related extension",
+  "description": "Bezier curve extension",
   "main": "index.js",
   "repository": {
     "type": "git",
