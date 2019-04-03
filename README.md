@@ -1,27 +1,27 @@
-<h1 style="text-align:center;">Bezier Curve Extension</h1>
+<h1 align="center">Bezier Curve Extension</h1>
 
-<p style="text-align:center;">
-    <a src="https://github.com/jiaming743/BezierCurve/blob/master/LICENSE"><img src="https://img.shields.io/github/license/jiaming743/bezierCurve.svg" alt="LICENSE" /> </a>
-    <a src="https://www.npmjs.com/package/@jiaminghi/bezier-curve"><img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" /> </a>
+<p align="center">
+    <a href="https://github.com/jiaming743/BezierCurve/blob/master/LICENSE"><img src="https://img.shields.io/github/license/jiaming743/bezierCurve.svg" alt="LICENSE" /> </a>
+    <a href="https://www.npmjs.com/package/@jiaminghi/bezier-curve"><img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" /> </a>
 </p>
 
 ### This plugin provides three extension methods for Bezier curves.
 
-- **bezierCurveToPolyline**
+* **bezierCurveToPolyline**
 
   Ability to abstract a Bezier curve into a polyline consisting of N **uniformly distributed** points.
 
-- **getBezierCurveLength**
+* **getBezierCurveLength**
 
   Get the Bezier length
 
-- **polylineToBezierCurve**
+* **polylineToBezierCurve**
 
   Abstracting a polyline consisting of N points into a Bezier curve
 
-------
+****
 
-<h3 style="text-align:center;">Examples</h3>
+<h3 align="center">Examples</h3>
 
 #### bezierCurve
 
@@ -39,13 +39,13 @@ const bezierCurve = [
 ]
 ```
 
-<p style="text-align:center;">
+<p align="center">
     <svg x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100">
 		<path fill="#FFFFFF" stroke="#000000" stroke-width="3" d="M20, 20 C100, 20 ,100, 80 ,180,80"/>
 	</svg>
 </p>
 
-<p style="text-align:center;"><i>bezierCurve</i> in <b>SVG</b></p>
+<p align="center"><i>bezierCurve</i> in <b>SVG</b></p>
 
 #### bezierCurveToPolyline
 
@@ -70,7 +70,7 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 // ...]
 ```
 
-<p style="text-align:center;">
+<p align="center">
     <svg x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100">
 		<polyline stroke="#000000" stroke-width="3" fill="#FFFFFF"
                   points="20,20 25.998752507628243,20.11632023466343 31.698106846035834,20.457189096242345 37.11424670004552,21.010468821119716 42.263355754480024,21.764021645678454 47.16161769416207,22.705709806301524 51.82521620391443,23.82339553937187 56.27033496855981,25.10494108127244 60.51315767292099,26.538208668386183 64.56986800182067,28.11106053709604 68.4566496400816,29.811358923784958 72.18968627252652,31.62696606483589 75.78516158397815,33.54574419663177 79.25925925925928,35.55555555555556 82.62816298319257,37.64426237799019 85.90805644060082,39.79972690031862 89.11512331630674,42.009811358923784 92.26554729513309,44.26237799018864 95.37551206190261,46.545289030496136 98.461201301438,48.8464067162292 101.538798698562,51.15359328377079 104.6244879380974,53.454710969503864 107.73445270486692,55.73762200981136 110.88487668369325,57.990188641076216 114.09194355939918,60.20027309968138 117.37183701680742,62.3557376220098 120.74074074074073,64.44444444444446 124.21483841602185,66.45425580336823 127.8103137274735,68.37303393516412 131.5433503599184,70.18864107621505 135.43013199817932,71.88893946290396 139.48684232707902,73.46179133161382 143.72966503144016,74.89505891872756 148.1747837960856,76.17660446062813 152.83838230583794,77.29429019369849 157.73664424551995,78.23597835432155 162.88575329995447,78.98953117888028 168.30189315396416,79.54281090375764 174.00124749237176,79.88367976533658 180,80"
@@ -78,14 +78,14 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 	</svg>
 </p>
 
-<p style="text-align:center;"><i>polyline</i> in <b>SVG</b></p>
+<p align="center"><i>polyline</i> in <b>SVG</b></p>
 
 #### Notice
 
-- The calculation result of *bezierCurveToPolyline* consists of N points, and N depends on the precision you set.
-- Recommended precision is 5-10.
-- If the setting precision is less than 1 or too large, the calculation result may be abnormal.
-- Sometimes it is **impossible** to achieve precision
+* The calculation result of *bezierCurveToPolyline* consists of N points, and N depends on the precision you set.
+* Recommended precision is 5-10.
+* If the setting precision is less than 1 or too large, the calculation result may be abnormal.
+* Sometimes it is **impossible** to achieve precision
 
 
 
@@ -121,7 +121,7 @@ const polyline = [
 ]
 ```
 
-<p style="text-align:center;">
+<p align="center">
     <svg x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100">
 		<polyline stroke="#000000" stroke-width="3" fill="#FFFFFF"
                   points="20, 70, 50, 30, 100, 70, 150, 30, 180, 70"
@@ -129,7 +129,7 @@ const polyline = [
 	</svg>
 </p>
 
-<p style="text-align:center;"><i>polyline</i> in <b>SVG</b></p>
+<p align="center"><i>polyline</i> in <b>SVG</b></p>
 
 
 
@@ -169,7 +169,7 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 // ]
 ```
 
-<p style="text-align:center;">
+<p align="center">
     <svg x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100">
 		<path fill="#FFFFFF" stroke="#000000" stroke-width="3"
               d="M20, 70
@@ -181,9 +181,9 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 	</svg>
 </p>
 
-<p style="text-align:center;"><i>bezierCurve</i> in <b>SVG</b></p>
+<p align="center"><i>bezierCurve</i> in <b>SVG</b></p>
 
-<p style="text-align:center;">
+<p align="center">
     <svg x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100">
 		<path fill="#FFFFFF" stroke="#000000" stroke-width="3"
               d="M20, 70
@@ -196,5 +196,4 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 	</svg>
 </p>
 
-<p style="text-align:center;"><i>closedBezierCurve</i> in <b>SVG</b></p>
-
+<p align="center"><i>closedBezierCurve</i> in <b>SVG</b></p>
