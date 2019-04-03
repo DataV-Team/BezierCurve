@@ -19,6 +19,12 @@
 
   Abstracting a polyline consisting of N points into a Bezier curve
 
+### Install with npm
+
+```shell
+npm install @jiaminghi/bezier-curve
+```
+
 ------
 
 <h3 align="center">Examples</h3>
