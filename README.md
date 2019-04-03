@@ -13,7 +13,7 @@
 
 - **getBezierCurveLength**
 
-  Get the Bezier length
+  Get the length of bezier curve
 
 - **polylineToBezierCurve**
 
