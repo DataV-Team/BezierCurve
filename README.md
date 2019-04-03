@@ -46,7 +46,7 @@ const bezierCurve = [
 ```
 
 <p align="center">
-    <img width="200px" src="https://github.com/jiaming743/BezierCurve/blob/master/exampleImgs/bezierCurve.png" />
+    <img width="200px" src="./exampleImgs/bezierCurve.png" />
 </p>
 
 <p align="center"><i>bezierCurve</i> in <b>SVG</b></p>
@@ -75,7 +75,7 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 ```
 
 <p align="center">
-    <img width="200px" src="https://github.com/jiaming743/BezierCurve/blob/master/exampleImgs/bezierCurveToPolyline.png" />
+    <img width="200px" src="./exampleImgs/bezierCurveToPolyline.png" />
 </p>
 
 <p align="center"><i>polyline</i> in <b>SVG</b></p>
@@ -122,7 +122,7 @@ const polyline = [
 ```
 
 <p align="center">
-    <img width="200px" src="https://github.com/jiaming743/BezierCurve/blob/master/exampleImgs/polyline.png" />
+    <img width="200px" src="./exampleImgs/polyline.png" />
 </p>
 
 <p align="center"><i>polyline</i> in <b>SVG</b></p>
@@ -166,13 +166,13 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 ```
 
 <p align="center">
-    <img width="200px" src="https://github.com/jiaming743/BezierCurve/blob/master/exampleImgs/polylineToBezierCurve.png" />
+    <img width="200px" src="./exampleImgs/polylineToBezierCurve.png" />
 </p>
 
 <p align="center"><i>bezierCurve</i> in <b>SVG</b></p>
 
 <p align="center">
-    <img width="200px" src="https://github.com/jiaming743/BezierCurve/blob/master/exampleImgs/polylineToClosedBezierCurve.png" />
+    <img width="200px" src="./exampleImgs/polylineToClosedBezierCurve.png" />
 </p>
 
 <p align="center"><i>closedBezierCurve</i> in <b>SVG</b></p>
