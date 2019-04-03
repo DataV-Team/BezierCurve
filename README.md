@@ -40,9 +40,7 @@ const bezierCurve = [
 ```
 
 <p align="center">
-    <svg x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100">
-		<path fill="#FFFFFF" stroke="#000000" stroke-width="3" d="M20, 20 C100, 20 ,100, 80 ,180,80"/>
-	</svg>
+    <img src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSLlm77lsYJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIxMDBweCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KCTxwYXRoIGZpbGw9IiNGRkZGRkYiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIzIiBkPSJNMjAsIDIwIEMxMDAsIDIwICwxMDAsIDgwICwxODAsODAiLz4NCjwvc3ZnPg0K" />
 </p>
 
 <p align="center"><i>bezierCurve</i> in <b>SVG</b></p>
@@ -197,21 +195,3 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 </p>
 
 <p align="center"><i>closedBezierCurve</i> in <b>SVG</b></p>
-
-<div>
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 702 630" style="enable-background:new 0 0 702 630;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;stroke:#231815;stroke-miterlimit:10;}
-</style>
-<path class="st0" d="M473.8,358.4c-42.4-24.5-88.5-30.5-115.1-31.8c26.7-1.3,72.7-7.3,115.1-31.8c64.7-37.3,107.8-83.6,96.4-103.4
-	s-73.1-5.6-137.8,31.8c-42.4,24.5-70.7,61.3-85.1,83.8c12.2-23.7,30-66.6,30-115.6c0-74.7-18.5-135.2-41.4-135.2
-	c-22.8,0-41.4,60.5-41.4,135.2c0,49,17.8,91.9,30,115.6c-14.4-22.5-42.7-59.3-85.1-83.8c-64.7-37.3-126.3-51.6-137.8-31.8
-	s31.7,66.1,96.4,103.4c42.4,24.5,88.5,30.5,115.1,31.8c-26.7,1.3-72.7,7.3-115.1,31.8c-64.7,37.3-107.8,83.6-96.4,103.4
-	s73.1,5.6,137.8-31.8c42.4-24.5,70.7-61.3,85.1-83.8c-12.2,23.7-30,66.6-30,115.6c0,74.7,18.5,135.2,41.4,135.2
-	c22.8,0,41.4-60.5,41.4-135.2c0-49-17.8-91.9-30-115.6c14.4,22.5,42.7,59.3,85.1,83.8c64.7,37.3,126.3,51.6,137.8,31.8
-	S538.4,395.7,473.8,358.4z"/>
-</svg>
-</div>
