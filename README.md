@@ -57,7 +57,7 @@ const bezierCurve = [
 /**
  * @description     Get the polyline corresponding to the Bezier curve
  * @param {Array}   bezierCurve BezierCurve data
- * @param {Number}  precision Calculation accuracy. Recommended for 1-20. Default = 5
+ * @param {Number}  precision Calculation accuracy. Recommended for 5-10. Default = 5
  * @return {Array}  Point data that constitutes a polyline after calculation
  */
 function bezierCurveToPolyline (bezierCurve, precision = 5) {
