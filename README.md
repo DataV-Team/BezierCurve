@@ -7,15 +7,15 @@
 
 ### This plugin provides three extension methods for Bezier curves.
 
-- **bezierCurveToPolyline**
+- **[bezierCurveToPolyline](#bezierCurveToPolyline)**
 
   Ability to abstract a Bezier curve into a polyline consisting of N **uniformly distributed** points.
 
-- **getBezierCurveLength**
+- **[getBezierCurveLength](#getBezierCurveLength)**
 
   Get the length of bezier curve
 
-- **polylineToBezierCurve**
+- **[polylineToBezierCurve](#polylineToBezierCurve)**
 
   Abstracting a polyline consisting of N points into a Bezier curve
 
@@ -85,7 +85,7 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 - The calculation result of *bezierCurveToPolyline* consists of N points, and N depends on the precision you set.
 - Recommended precision is 5-10.
 - If the setting precision is less than 1 or too large, the calculation result may be abnormal.
-- Sometimes it is **impossible** to achieve precision
+- Sometimes it is **impossible** to achieve precision.
 
 
 
