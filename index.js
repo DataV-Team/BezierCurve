@@ -4,7 +4,7 @@ import { getBezierCurveLength } from './lib/bezierCurveToPolyline'
 
 import polylineToBezierCurve from './lib/polylineToBezierCurve'
 
-export {
+export default {
   bezierCurveToPolyline,
   getBezierCurveLength,
   polylineToBezierCurve
