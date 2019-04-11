@@ -13,16 +13,16 @@
 
 - **[getBezierCurveLength](#getBezierCurveLength)**
 
-  Get the length of bezier curve
+  Get the length of bezier curve.
 
 - **[polylineToBezierCurve](#polylineToBezierCurve)**
 
-  Abstracting a polyline consisting of N points into a Bezier curve
+  Abstracting a polyline consisting of N points into a Bezier curve.
 
 ### Install with npm
 
 ```shell
-npm install @jiaminghi/bezier-curve
+$ npm install @jiaminghi/bezier-curve
 ```
 
 ------
@@ -55,10 +55,10 @@ const bezierCurve = [
 
 ```javascript
 /**
- * @description     Get the polyline corresponding to the Bezier curve
- * @param {Array}   bezierCurve BezierCurve data
- * @param {Number}  precision Calculation accuracy. Recommended for 5-10. Default = 5
- * @return {Array}  Point data that constitutes a polyline after calculation
+ * @description Get the polyline corresponding to the Bezier curve
+ * @param {Array} bezierCurve BezierCurve data
+ * @param {Number} precision  Calculation accuracy. Recommended for 5-10. Default = 5
+ * @return {Array} Point data that constitutes a polyline after calculation
  */
 function bezierCurveToPolyline (bezierCurve, precision = 5) {
   // ...
@@ -93,9 +93,9 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 
 ```js
 /**
- * @description     Get the polyline corresponding to the Bezier curve
- * @param {Array}   bezierCurve bezierCurve data
- * @param {Number}  precision calculation accuracy. Recommended for 5-10. Default = 5
+ * @description Get the polyline corresponding to the Bezier curve
+ * @param {Array} bezierCurve bezierCurve data
+ * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
  * @return {Number} BezierCurve length
  */
 export function getBezierCurveLength (bezierCurve, precision = 5) {
@@ -133,12 +133,12 @@ const polyline = [
 
 ```javascript
 /**
- * @description            Abstract the polyline formed by N points into a set of bezier curve
+ * @description Abstract the polyline formed by N points into a set of bezier curve
  * @param {Array} polyline A set of points that make up a polyline
  * @param {Boolean} close  Closed curve
  * @param {Number} offsetA Smoothness
  * @param {Number} offsetB Smoothness
- * @return {Array}         A set of bezier curve
+ * @return {Array} A set of bezier curve
  */
 function polylineToBezierCurve (polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
 	// ...
