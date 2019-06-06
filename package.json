@@ -1,14 +1,16 @@
 {
   "name": "@jiaminghi/bezier-curve",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Bezier curve extension",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jiaming743/BezierCurve.git"
   },
   "scripts": {
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
@@ -21,5 +23,13 @@
     "smoothline",
     "length"
   ],
-  "homepage": "https://github.com/jiaming743/BezierCurve#readme"
+  "homepage": "https://github.com/jiaming743/BezierCurve#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4"
+  }
 }
