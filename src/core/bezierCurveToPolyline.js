@@ -57,7 +57,7 @@ function abstractBezierCurveToPolyline (bezierCurve, precision = 5) {
  * @param {Array} controlPoint1 BezierCurve controlPoint1. [x, y]
  * @param {Array} controlPoint2 BezierCurve controlPoint2. [x, y]
  * @param {Array} endPoint      BezierCurve end point. [x, y]
- * @return {Function} Expected function 
+ * @return {Function} Expected function
  */
 function createGetBezierCurveTPointFun (beginPoint, controlPoint1, controlPoint2, endPoint) {
   return function (t) {
@@ -102,7 +102,7 @@ function getNumsSum (nums) {
  */
 function getSegmentPointsDistance (segmentPoints) {
   return segmentPoints.map((points, i) => {
-    return new Array (points.length - 1)
+    return new Array(points.length - 1)
       .fill(0)
       .map((temp, j) => getTwoPointDistance(points[j], points[j + 1]))
   })
@@ -232,7 +232,6 @@ function calcUniformPointsByIteration (segmentPoints, getSegmentTPointFuns, segm
     rounds *= 4
 
     cycles++
-
   } while (rounds <= 1025)
 
   segmentPoints = segmentPoints.reduce((all, seg) => all.concat(seg), [])
@@ -250,7 +249,7 @@ function calcUniformPointsByIteration (segmentPoints, getSegmentTPointFuns, segm
  * @param {Number} precision  Calculation accuracy. Recommended for 1-20. Default = 5
  * @return {Array} Point data that constitutes a polyline after calculation
  */
-function bezierCurveToPolyline (bezierCurve, precision = 5) {
+export function bezierCurveToPolyline (bezierCurve, precision = 5) {
   const { segmentPoints } = abstractBezierCurveToPolyline(bezierCurve, precision)
 
   return segmentPoints
