@@ -247,9 +247,27 @@ function calcUniformPointsByIteration (segmentPoints, getSegmentTPointFuns, segm
  * @description Get the polyline corresponding to the Bezier curve
  * @param {Array} bezierCurve BezierCurve data
  * @param {Number} precision  Calculation accuracy. Recommended for 1-20. Default = 5
- * @return {Array} Point data that constitutes a polyline after calculation
+ * @return {Array|Boolean} Point data that constitutes a polyline after calculation (Invalid input will return false)
  */
 export function bezierCurveToPolyline (bezierCurve, precision = 5) {
+  if (!bezierCurve) {
+    console.error('bezierCurveToPolyline: Missing parameters!')
+
+    return false
+  }
+
+  if (!(bezierCurve instanceof Array)) {
+    console.error('bezierCurveToPolyline: Parameter bezierCurve must be an array!')
+
+    return false
+  }
+
+  if (typeof precision !== 'number') {
+    console.error('bezierCurveToPolyline: Parameter precision must be a number!')
+
+    return false
+  }
+
   const { segmentPoints } = abstractBezierCurveToPolyline(bezierCurve, precision)
 
   return segmentPoints
@@ -259,9 +277,27 @@ export function bezierCurveToPolyline (bezierCurve, precision = 5) {
  * @description Get the polyline corresponding to the Bezier curve
  * @param {Array} bezierCurve bezierCurve data
  * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
- * @return {Number} BezierCurve length
+ * @return {Number|Boolean} BezierCurve length (Invalid input will return false)
  */
 export function getBezierCurveLength (bezierCurve, precision = 5) {
+  if (!bezierCurve) {
+    console.error('getBezierCurveLength: Missing parameters!')
+
+    return false
+  }
+
+  if (!(bezierCurve instanceof Array)) {
+    console.error('getBezierCurveLength: Parameter bezierCurve must be an array!')
+
+    return false
+  }
+
+  if (typeof precision !== 'number') {
+    console.error('getBezierCurveLength: Parameter precision must be a number!')
+
+    return false
+  }
+
   const { segmentPoints } = abstractBezierCurveToPolyline(bezierCurve, precision)
 
   // Calculate the total length of the points that make up the polyline

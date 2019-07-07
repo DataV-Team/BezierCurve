@@ -4,11 +4,17 @@
  * @param {Boolean} close  Closed curve
  * @param {Number} offsetA Smoothness
  * @param {Number} offsetB Smoothness
- * @return {Array} A set of bezier curve
+ * @return {Array|Boolean} A set of bezier curve (Invalid input will return false)
  */
 function polylineToBezierCurve (polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
+  if (!(polyline instanceof Array)) {
+    console.error('polylineToBezierCurve: Parameter polyline must be an array!')
+
+    return false
+  }
+
   if (polyline.length <= 2) {
-    console.error('Converting to a curve requires at least 3 points!')
+    console.error('polylineToBezierCurve: Converting to a curve requires at least 3 points!')
 
     return false
   }
