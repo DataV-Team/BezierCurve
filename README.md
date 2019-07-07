@@ -1,6 +1,7 @@
 <h1 align="center">Bezier Curve Extension</h1>
 
 <p align="center">
+    <a href="https://travis-ci.com/jiaming743/bezierCurve"><img src="https://img.shields.io/travis/com/jiaming743/bezierCurve.svg" alt="Travis CI"></a>
     <a href="https://github.com/jiaming743/BezierCurve/blob/master/LICENSE"><img src="https://img.shields.io/github/license/jiaming743/bezierCurve.svg" alt="LICENSE" /> </a>
     <a href="https://www.npmjs.com/package/@jiaminghi/bezier-curve"><img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" /> </a>
 </p>
