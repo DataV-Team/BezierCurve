@@ -33,7 +33,7 @@ $ npm install @jiaminghi/bezier-curve
 ```javascript
 import bezierCurve from '@jiaminghi/bezier-curve'
 
-bezierCurve.bezierCurveToPolyline(curve)
+// do something
 ```
 
 ------
