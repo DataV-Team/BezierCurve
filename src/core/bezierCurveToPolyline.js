@@ -274,7 +274,7 @@ export function bezierCurveToPolyline (bezierCurve, precision = 5) {
 }
 
 /**
- * @description Get the polyline corresponding to the Bezier curve
+ * @description Get the bezier curve length
  * @param {Array} bezierCurve bezierCurve data
  * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
  * @return {Number|Boolean} BezierCurve length (Invalid input will return false)
