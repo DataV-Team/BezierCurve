@@ -1,4 +1,4 @@
-[ENGLISH](./README.md)
+[中文](./README.md)
 
 <h1 align="center">Bezier Curve Extension</h1>
 
@@ -8,51 +8,51 @@
     <a href="https://www.npmjs.com/package/@jiaminghi/bezier-curve"><img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" /> </a>
 </p>
 
-### 这是一个提供如下几个方法的三次贝塞尔曲线插件。
+### This plugin provides three extension methods for Bezier curves.
 
 - **[bezierCurveToPolyline](#bezierCurveToPolyline)**
 
-  将贝塞尔曲线抽象成由N个**均匀分布**的点构成的折线
+  Ability to abstract a Bezier curve into a polyline consisting of N **uniformly distributed** points.
 
 - **[getBezierCurveLength](#getBezierCurveLength)**
 
-  获取贝塞尔曲线的长度
+  Get the length of bezier curve.
 
 - **[polylineToBezierCurve](#polylineToBezierCurve)**
 
-  将由N个点构成的折线抽象成光滑的贝塞尔曲线
+  Abstracting a polyline consisting of N points into a Bezier curve.
 
-### npm安装
+### Install with npm
 
 ```shell
 $ npm install @jiaminghi/bezier-curve
 ```
 
-### 使用
+### Use
 
 ```javascript
-import bezierCurve from '@jiaminghi/bezier-curve'
+import { bezierCurveToPolyline } from '@jiaminghi/bezier-curve'
 
 // do something
 ```
 
 ------
 
-<h3 align="center">示例</h3>
+<h3 align="center">Examples</h3>
 
 #### bezierCurve
 
 ```javascript
-// 贝塞尔曲线数据结构
+// Bezier curve data structure
 const bezierCurve = [
-    // 起始点
+    // Start point
 	[20, 20],
-    // 多段贝塞尔曲线
+    // Multiple sets of bezier curve
     [
-        // 控制点1，控制点2，结束点
+        // controlPoint1,controlPoint2,endPoint
         [100, 20],[100, 80],[180,80]
     ],
-    // 下一段贝塞尔曲线的起始点是上一段的结束点
+    // The starting point of the next bezier curve is the end point of the previous bezier curve
     // [...],[...]
 ]
 ```
@@ -67,10 +67,10 @@ const bezierCurve = [
 
 ```javascript
 /**
- * @description 通过贝塞尔曲线获取折线
- * @param {Array} bezierCurve 贝塞尔曲线数据
- * @param {Number} precision  计算精度 建议5-10 默认为5
- * @return {Array|Boolean} 构成折线的点集 (无效输入将返回false)
+ * @description Get the polyline corresponding to the Bezier curve
+ * @param {Array} bezierCurve BezierCurve data
+ * @param {Number} precision  Calculation accuracy. Recommended for 5-10. Default = 5
+ * @return {Array|Boolean} Point data that constitutes a polyline after calculation (Invalid input will return false)
  */
 function bezierCurveToPolyline (bezierCurve, precision = 5) {
   // ...
@@ -94,11 +94,11 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 
 #### Notice
 
-- *bezierCurveToPolyline*的计算结果是由N个点构成的折线，N取决于设置的精度。
-- 理想情况下，计算结果中相邻的两个点的距离等于设置的精度（单位px）。
-- 建议精度5-10。
-- 如果设置的精度过小或过大（小于1或大于10），可能导致计算异常。
-- 设置的精度并不是每次都能达到。
+- The calculation result of *bezierCurveToPolyline* consists of N points, and N depends on the precision you set.
+- Ideally, the distance between two adjacent points in the calculation result is equal to the set accuracy (unit px).
+- Recommended precision is 5-10.
+- If the setting precision is less than 1 or too large, the calculation result may be abnormal.
+- Sometimes it is **impossible** to achieve precision.
 
 
 
@@ -106,16 +106,16 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 
 ```js
 /**
- * @description 获取贝塞尔曲线长度
- * @param {Array} bezierCurve 贝塞尔曲线数据
- * @param {Number} precision  计算精度 建议5-10 默认为5
- * @return {Number|Boolean} 贝塞尔曲线长度 (无效输入将返回false)
+ * @description Get the bezier curve length
+ * @param {Array} bezierCurve bezierCurve data
+ * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
+ * @return {Number|Boolean} BezierCurve length (Invalid input will return false)
  */
 export function getBezierCurveLength (bezierCurve, precision = 5) {
   // ...
 }
 
-// 通常情况下，默认精度已经能够达到较好的视觉效果。
+// Normally the default precision can achieve better visual effects.
 const length = bezierCurveToPolyline(bezierCurve)
 ```
 
@@ -124,7 +124,7 @@ const length = bezierCurveToPolyline(bezierCurve)
 #### polyline
 
 ```javascript
-// 折线数据结构
+// polyline data structure
 const polyline = [
     [20, 70],
     [50, 30],
@@ -146,12 +146,12 @@ const polyline = [
 
 ```javascript
 /**
- * @description 将由N个点构成的折线抽象为光滑的贝塞尔曲线
- * @param {Array} polyline 由N个点构成的折线数据
- * @param {Boolean} close  是否闭合
- * @param {Number} offsetA 光滑程度
- * @param {Number} offsetB 光滑程度
- * @return {Array|Boolean} 贝塞尔曲线数据 (无效输入将返回false)
+ * @description Abstract the polyline formed by N points into a set of bezier curve
+ * @param {Array} polyline A set of points that make up a polyline
+ * @param {Boolean} close  Closed curve
+ * @param {Number} offsetA Smoothness
+ * @param {Number} offsetB Smoothness
+ * @return {Array|Boolean} A set of bezier curve (Invalid input will return false)
  */
 function polylineToBezierCurve (polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
 	// ...
