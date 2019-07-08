@@ -16,7 +16,7 @@ const bezierCurve = [
 const polylinePrecision5 = bezierCurveToPolyline(bezierCurve)
 const polylinePrecision10 = bezierCurveToPolyline(bezierCurve, 10)
 
-function findNoNInArray (arr) {
+function findNaNInArray (arr) {
   return arr.findIndex(n => !Number.isFinite(n)) !== -1
 }
 
@@ -181,9 +181,9 @@ describe('polylineToBezierCurve', () => {
     expect(polylineToBezierCurve(polylinePrecision5)).to.satisfy(line => {
       return !line.find((item, i) => {
         if (i === 0) {
-          return findNoNInArray(item)
+          return findNaNInArray(item)
         } else {
-          return item.find(itemElement => findNoNInArray(itemElement))
+          return item.find(itemElement => findNaNInArray(itemElement))
         }
       })
     })
@@ -193,9 +193,9 @@ describe('polylineToBezierCurve', () => {
     expect(polylineToBezierCurve(polylinePrecision10)).to.satisfy(line => {
       return !line.find((item, i) => {
         if (i === 0) {
-          return findNoNInArray(item)
+          return findNaNInArray(item)
         } else {
-          return item.find(itemElement => findNoNInArray(itemElement))
+          return item.find(itemElement => findNaNInArray(itemElement))
         }
       })
     })
