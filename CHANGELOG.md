@@ -1,3 +1,9 @@
+# 0.0.6-alpha (2019-07-08)
+
+### Perfect
+
+- **export:** Optimized export method.
+
 # 0.0.5-alpha (2019-06-06)
 
 ### Perfect
