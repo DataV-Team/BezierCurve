@@ -36,6 +36,20 @@ import bezierCurve from '@jiaminghi/bezier-curve'
 // do something
 ```
 
+### 快速体验
+
+```html
+<!--资源位于个人服务器仅供体验和测试，请勿在生产环境使用-->
+<!--调试版-->
+<script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.map.js"></script>
+<!--压缩版-->
+<script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.min.js"></script>
+<script>
+  console.log(bezierCurve)
+  // { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve }
+</script>
+```
+
 ------
 
 <h3 align="center">示例</h3>

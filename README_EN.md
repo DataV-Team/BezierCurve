@@ -36,6 +36,20 @@ import { bezierCurveToPolyline } from '@jiaminghi/bezier-curve'
 // do something
 ```
 
+### Quick experience
+
+```html
+<!--Resources are located on personal servers for experience and testing only, do not use in production environments-->
+<!--Debug version-->
+<script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.map.js"></script>
+<!--Compression version-->
+<script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.min.js"></script>
+<script>
+  console.log(bezierCurve)
+  // { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve }
+</script>
+```
+
 ------
 
 <h3 align="center">Examples</h3>
