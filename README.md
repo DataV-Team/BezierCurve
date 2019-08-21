@@ -45,8 +45,8 @@ import bezierCurve from '@jiaminghi/bezier-curve'
 <!--压缩版-->
 <script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.min.js"></script>
 <script>
-  console.log(bezierCurve)
-  // { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve }
+    const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.bezierCurve
+    // do something
 </script>
 ```
 
