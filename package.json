@@ -1,6 +1,6 @@
 {
   "name": "@jiaminghi/bezier-curve",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Bezier curve extension",
   "main": "lib/index.js",
@@ -28,11 +28,11 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.4.4",
     "@jiaminghi/fs": "^0.0.2",
-    "ftp": "^0.3.10",
     "chai": "^4.2.0",
+    "ftp": "^0.3.10",
     "mocha": "^6.1.4"
   },
   "dependencies": {
