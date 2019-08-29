@@ -1,5 +1,3 @@
-import "regenerator-runtime/runtime"
-
 import { bezierCurveToPolyline, getBezierCurveLength } from './core/bezierCurveToPolyline'
 import polylineToBezierCurve from './core/polylineToBezierCurve'
 
