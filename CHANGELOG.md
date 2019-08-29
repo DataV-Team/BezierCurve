@@ -1,3 +1,9 @@
+# 0.0.9-alpha (2019-08-28)
+
+### Perfect
+
+- **babel:** Upgrade babel compilation mode.
+
 # 0.0.8-alpha (2019-08-28)
 
 ### Perfect
