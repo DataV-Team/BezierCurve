@@ -31,6 +31,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.4.4",
     "@jiaminghi/fs": "^0.0.2",
+    "browserify": "^16.5.0",
     "chai": "^4.2.0",
     "ftp": "^0.3.10",
     "mocha": "^6.1.4"
