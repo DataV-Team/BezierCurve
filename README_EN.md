@@ -3,16 +3,22 @@
 <h1 align="center">Bezier Curve Extension</h1>
 
 <p align="center">
-    <a href="https://travis-ci.com/DataV-Team/bezierCurve"><img src="https://img.shields.io/travis/com/DataV-Team/bezierCurve.svg" alt="Travis CI"></a>
-    <a href="https://github.com/DataV-Team/BezierCurve/blob/master/LICENSE"><img src="https://img.shields.io/github/license/DataV-Team/bezierCurve.svg" alt="LICENSE" /> </a>
-    <a href="https://www.npmjs.com/package/@jiaminghi/bezier-curve"><img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" /> </a>
+    <a href="https://travis-ci.com/DataV-Team/beziercurve">
+      <img src="https://img.shields.io/travis/com/DataV-Team/bezierCurve.svg" alt="Travis CI">
+    </a>
+    <a href="https://github.com/DataV-Team/beziercurve/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/DataV-Team/beziercurve.svg" alt="LICENSE" />
+    </a>
+    <a href="https://www.npmjs.com/package/@jiaminghi/bezier-curve">
+      <img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" />
+    </a>
 </p>
 
 ### This plugin provides three extension methods for Bezier curves.
 
 - **[bezierCurveToPolyline](#bezierCurveToPolyline)**
 
-  Ability to abstract a Bezier curve into a polyline consisting of N **uniformly distributed** points.
+  Ability to abstract a Bezier curve into a polyline consisting of N points.
 
 - **[getBezierCurveLength](#getBezierCurveLength)**
 
@@ -39,13 +45,12 @@ import { bezierCurveToPolyline } from '@jiaminghi/bezier-curve'
 ### Quick experience
 
 ```html
-<!--Resources are located on personal servers for experience and testing only, do not use in production environments-->
 <!--Debug version-->
-<script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.map.js"></script>
+<script src="https://unpkg.com/@jiaminghi/color/dist/index.js"></script>
 <!--Compression version-->
-<script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.min.js"></script>
+<script src="https://unpkg.com/@jiaminghi/color/dist/index.min.js"></script>
 <script>
-  const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.bezierCurve
+  const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.BezierCurve
   // do something
 </script>
 ```
@@ -56,20 +61,27 @@ import { bezierCurveToPolyline } from '@jiaminghi/bezier-curve'
 
 #### bezierCurve
 
-```javascript
-// Bezier curve data structure
-const bezierCurve = [
-  // Start point
+```typescript
+type Point = [number, number]
+
+/**
+ * [controlPoint1, controlPoint2, endPoint]
+ */
+type BezierCurveSegment = [Point, Point, Point]
+
+/**
+ * [start point, Multiple sets of bezier curve, ...]
+ * The starting point of the next bezier curve is the end point of the previous bezier curve
+ */
+type BezierCurve = [Point, BezierCurveSegment, ...BezierCurveSegment[]]
+
+const bezierCurve: BezierCurve = [
   [20, 20],
-  // Multiple sets of bezier curve
   [
-    // controlPoint1,controlPoint2,endPoint
     [100, 20],
     [100, 80],
     [180, 80],
   ],
-  // The starting point of the next bezier curve is the end point of the previous bezier curve
-  // [...],[...]
 ]
 ```
 
@@ -81,20 +93,21 @@ const bezierCurve = [
 
 #### bezierCurveToPolyline
 
-```javascript
+```typescript
 /**
- * @description Get the polyline corresponding to the Bezier curve
- * @param {Array} bezierCurve BezierCurve data
- * @param {Number} precision  Calculation accuracy. Recommended for 5-10. Default = 5
- * @return {Array|Boolean} Point data that constitutes a polyline after calculation (Invalid input will return false)
+ * @description Transform bezierCurve to polyline
+ * @param {BezierCurve} bezierCurve bezier curve
+ * @param {number} precision        Wanted precision
+ * @param {number} recursiveCount   Recursive count
+ * @return {Point[]} Polyline
  */
-function bezierCurveToPolyline(bezierCurve, precision = 5) {
-  // ...
-}
+type bezierCurveToPolyline = (
+  bezierCurve: BezierCurve,
+  precision = 5,
+  resursiveCount = 0
+) => Point[]
 
-const precision = 5
-
-const polyline = bezierCurveToPolyline(bezierCurve, precision)
+const polyline = bezierCurveToPolyline(bezierCurve)
 // polyline = [
 // [[20,20],
 // [25.998752507628243,20.11632023466343],[31.698106846035834,20.457189096242345],
@@ -113,31 +126,28 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 - The calculation result of _bezierCurveToPolyline_ consists of N points, and N depends on the precision you set.
 - Ideally, the distance between two adjacent points in the calculation result is equal to the set accuracy (unit px).
 - Recommended precision is 5-10.
-- If the setting precision is less than 1 or too large, the calculation result may be abnormal.
-- Sometimes it is **impossible** to achieve precision.
+- The precision of the setting is usually not achieved, unless the higher the number of recursiveCount, the higher the calculation cost.
 
 #### getBezierCurveLength
 
-```js
+```typescript
 /**
- * @description Get the bezier curve length
- * @param {Array} bezierCurve bezierCurve data
- * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
- * @return {Number|Boolean} BezierCurve length (Invalid input will return false)
+ * @description Get the length of the bezier curve
+ * @param {BezierCurve} bezierCurve bezier curve
+ * @param {number} precision        Wanted precision
+ * @param {number} recursiveCount   Recursive count
+ * @return {number} The length
  */
-export function getBezierCurveLength(bezierCurve, precision = 5) {
-  // ...
-}
+type getBezierCurveLength = (bezierCurve: BezierCurve, precision = 5, resursiveCount = 0) => number
 
 // Normally the default precision can achieve better visual effects.
-const length = bezierCurveToPolyline(bezierCurve)
+const length = getBezierCurveLength(bezierCurve)
 ```
 
 #### polyline
 
-```javascript
-// polyline data structure
-const polyline = [
+```typescript
+const polyline: Point[] = [
   [20, 70],
   [50, 30],
   [100, 70],
@@ -154,18 +164,21 @@ const polyline = [
 
 #### polylineToBezierCurve
 
-```javascript
+```typescript
 /**
- * @description Abstract the polyline formed by N points into a set of bezier curve
- * @param {Array} polyline A set of points that make up a polyline
- * @param {Boolean} close  Closed curve
- * @param {Number} offsetA Smoothness
- * @param {Number} offsetB Smoothness
- * @return {Array|Boolean} A set of bezier curve (Invalid input will return false)
+ * @description Convert polyline to bezierCurve
+ * @param {Point[]} polyline A set of points that make up a polyline
+ * @param {boolean} close    Closed curve
+ * @param {number} offsetA   Smoothness
+ * @param {number} offsetB   Smoothness
+ * @return {BezierCurve} A set of bezier curve (Invalid input will return false)
  */
-function polylineToBezierCurve(polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
-  // ...
-}
+type polylineToBezierCurve = (
+  polyline: Point[],
+  close = false,
+  offsetA = 0.25,
+  offsetB = 0.25
+) => BezierCurve
 
 const bezierCurve = polylineToBezierCurve(polyline)
 // bezierCurve = [

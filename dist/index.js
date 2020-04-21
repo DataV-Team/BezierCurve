@@ -34,19 +34,46 @@ function getBezierCurveStartPoint(bezierCurve) {
 }
 
 function getBezierCurveEndPoint(bezierCurve) {
-  return bezierCurve.slice(-1)[2];
+  return bezierCurve.slice(-1)[0][2];
 }
 
 function getBezierCurveSegments(bezierCurve) {
   return bezierCurve.slice(1);
 }
 /**
+ * @description Get the sum of the {number[]}
+ */
+
+
+function getNumSum(nums) {
+  return nums.reduce(function (sum, num) {
+    return sum + num;
+  }, 0);
+}
+/**
+ * @description Get the distance between two points
+ */
+
+
+function getTwoPointDistance(_a, _b) {
+  var ax = _a[0],
+      ay = _a[1];
+  var bx = _b[0],
+      by = _b[1];
+  return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
+}
+
+function flatten(input) {
+  return input.reduce(function (_, __) {
+    return __spreadArrays(_, __);
+  }, []);
+}
+/**
  * @description  Generate a function to calculate the point coordinates at time t
- * @param {Point} beginPoint    BezierCurve begin point. [x, y]
- * @param {Point} controlPoint1 BezierCurve controlPoint1. [x, y]
- * @param {Point} controlPoint2 BezierCurve controlPoint2. [x, y]
- * @param {Point} endPoint      BezierCurve end point. [x, y]
- * @return {GetBezierCurveTPointFunction} Expected function
+ * @param {Point} beginPoint    BezierCurve begin point
+ * @param {Point} controlPoint1 BezierCurve controlPoint1
+ * @param {Point} controlPoint2 BezierCurve controlPoint2
+ * @param {Point} endPoint      BezierCurve end point
  */
 
 
@@ -64,6 +91,10 @@ function createGetBezierCurveTPointFun(beginPoint, controlPoint1, controlPoint2,
     return point;
   };
 }
+/**
+ * @description Create {GetBezierCurveTPointFunction} for every segment of bezierCurve
+ */
+
 
 function createGetSegmentTPointFuns(bezierCurve) {
   var segments = getBezierCurveSegments(bezierCurve);
@@ -73,13 +104,6 @@ function createGetSegmentTPointFuns(bezierCurve) {
     return createGetBezierCurveTPointFun.apply(void 0, __spreadArrays([beginPoint], segment));
   });
 }
-/**
- * @description Get segment points by
- * @param {GetBezierCurveTPointFunction[]} getSegmentTPointFuns Multiple sets of point data
- * @param {number[]} segmentPointsNum Multiple sets of point data
- * @return {Point[][]} Segment points
- */
-
 
 function getSegmentPointsByNum(getSegmentTPointFuns, segmentPointsNum) {
   return getSegmentTPointFuns.map(function (getSegmentTPointFun, i) {
@@ -97,24 +121,7 @@ function createSegmentPoints(getSegmentTPointFuns) {
   return getSegmentPointsByNum(getSegmentTPointFuns, segmentPointsNum);
 }
 /**
- * @description Get the distance between two points
- * @param {Point} point1 BezierCurve begin point. [x, y]
- * @param {Point} point2 BezierCurve controlPoint1. [x, y]
- * @return {Number} Expected distance
- */
-
-
-function getTwoPointDistance(_a, _b) {
-  var ax = _a[0],
-      ay = _a[1];
-  var bx = _b[0],
-      by = _b[1];
-  return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
-}
-/**
  * @description Get the distance of multiple sets of points
- * @param {Point[]} segmentPoints Multiple sets of point data
- * @return {number[]} Distance of multiple sets of point data
  */
 
 
@@ -126,18 +133,6 @@ function getPointsDistance(points) {
 
 function getSegmentPointsDistance(segmentPoints) {
   return segmentPoints.map(getPointsDistance);
-}
-/**
- * @description Get the sum of the array of numbers
- * @param {Array} nums An array of numbers
- * @return {Number} Expected sum
- */
-
-
-function getNumsSum(nums) {
-  return nums.reduce(function (sum, num) {
-    return sum + num;
-  }, 0);
 }
 /**
  * @description Get the sum of deviations between line segment and the average length
@@ -154,17 +149,17 @@ function getAllDeviations(segmentPointsDistance, avgLength) {
     });
   };
 
-  return getNumsSum(segmentPointsDistance.map(calcDeviation).map(getNumsSum));
+  return getNumSum(segmentPointsDistance.map(calcDeviation).map(getNumSum));
 }
 
 function getSegmentPointsData(segmentPoints) {
   var segmentPointsDistance = getSegmentPointsDistance(segmentPoints);
-  var lineSegmentNum = getNumsSum(segmentPointsDistance.map(function (_a) {
+  var lineSegmentNum = getNumSum(segmentPointsDistance.map(function (_a) {
     var length = _a.length;
     return length;
   }));
-  var segmentLength = segmentPointsDistance.map(getNumsSum);
-  var totalLength = getNumsSum(segmentLength);
+  var segmentLength = segmentPointsDistance.map(getNumSum);
+  var totalLength = getNumSum(segmentLength);
   var avgDistance = totalLength / lineSegmentNum;
   var deviation = getAllDeviations(segmentPointsDistance, avgDistance);
   return {
@@ -175,47 +170,41 @@ function getSegmentPointsData(segmentPoints) {
   };
 }
 
-function mergeSegmentPoints(segmentPoints) {
-  return segmentPoints.reduce(function (_, __) {
-    return __spreadArrays(_, __);
-  }, []);
-}
-
 function getSegmentPointsCount(segmentPoints) {
-  return mergeSegmentPoints(segmentPoints).length;
+  return flatten(segmentPoints).length;
 }
 
 function reGetSegmentPoints(segmentPoints, getSegmentTPointFuns, _a, precision) {
   var avgDistance = _a.avgDistance,
       totalLength = _a.totalLength,
       segmentLength = _a.segmentLength;
-  var pointsCount = getSegmentPointsCount(segmentPoints); // 多加一些点 便于精确计算
+  var pointsCount = getSegmentPointsCount(segmentPoints); // Add more points to enhance accuracy
 
-  pointsCount = Math.ceil(avgDistance / precision * pointsCount * 1.1); // 细分到每大段折线段的points总数
+  pointsCount = Math.ceil(avgDistance / precision * pointsCount * 1.1); // Redistribution points acount
 
   var segmentPointsNum = segmentLength.map(function (length) {
     return Math.ceil(length / totalLength * pointsCount);
-  }); // 再次获取每大段折线的points坐标
-  // Calculate the points after redistribution
+  }) // At least need two points
+  .map(function (_) {
+    return _ > 1 ? _ : 2;
+  }); // Calculate the points after redistribution
 
   return getSegmentPointsByNum(getSegmentTPointFuns, segmentPointsNum);
 }
 
-function recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, _a) {
+function recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, _a, recursiveCount) {
   var avgDistance = _a.avgDistance;
-  var pointsCount = getSegmentPointsCount(segmentPoints); // 每次增量
-
+  var pointsCount = getSegmentPointsCount(segmentPoints);
   var stepSize = 1 / pointsCount / 10; // Recursively for each segment of the polyline
 
   getSegmentTPointFuns.forEach(function (getSegmentTPointFun, i) {
     var currentSegmentPointsNum = segmentPoints[i].length;
-    var tGap = 1 / (currentSegmentPointsNum - 1); // t数组
-
+    var tGap = 1 / (currentSegmentPointsNum - 1);
     var t = new Array(currentSegmentPointsNum).fill(0).map(function (_, j) {
       return j * tGap;
     }); // Repeated recursive offset
 
-    for (var r = 0; r < 10; r++) {
+    for (var r = 0; r < recursiveCount; r++) {
       var distance = getPointsDistance(segmentPoints[i]);
       var deviations = distance.map(function (d) {
         return d - avgDistance;
@@ -223,7 +212,7 @@ function recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, _a) {
       var offset = 0;
 
       for (var j = 0; j < currentSegmentPointsNum; j++) {
-        if (j === 0) return;
+        if (j === 0) continue;
         offset += deviations[j - 1];
         t[j] -= stepSize * offset;
         if (t[j] > 1) t[j] = 1;
@@ -235,89 +224,87 @@ function recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, _a) {
   return segmentPoints;
 }
 
-function calcUniformPointsByIteration(segmentPoints, getSegmentTPointFuns, precision, number) {
-  if (number === void 0) {
-    number = 0;
-  }
-
+function calcUniformPointsByIteration(segmentPoints, getSegmentTPointFuns, precision, recursiveCount) {
+  console.warn('-------------start-------------');
   var segmentPointsData = getSegmentPointsData(segmentPoints);
-  if (segmentPointsData.deviation <= precision) return mergeSegmentPoints(segmentPoints);
+  if (segmentPointsData.deviation <= precision) return flatten(segmentPoints);
   segmentPoints = reGetSegmentPoints(segmentPoints, getSegmentTPointFuns, segmentPointsData, precision);
+  if (recursiveCount <= 0) return flatten(segmentPoints);
   segmentPointsData = getSegmentPointsData(segmentPoints);
-  segmentPoints = recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, segmentPointsData);
-  if (number++ > 10) return mergeSegmentPoints(segmentPoints);
-  return calcUniformPointsByIteration(segmentPoints, getSegmentTPointFuns, precision, number);
+  segmentPoints = recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, segmentPointsData, recursiveCount);
+  return flatten(segmentPoints);
 }
 /**
- * @description               Abstract the curve as a polyline consisting of N points
+ * @description Convert bezierCurve to polyline.
+ * Calculation results cannot guarantee accuracy！
+ * Recusive calculation can get more accurate results
  * @param {BezierCurve} bezierCurve bezierCurve data
- * @param {Number} precision  calculation accuracy. Recommended for 1-20. Default = 5
- * @return {Object}           Calculation results and related data
- * @return {Array}            Option.segmentPoints Point data that constitutes a polyline after calculation
- * @return {Number}           Option.cycles Number of iterations
- * @return {Number}           Option.rounds The number of recursions for the last iteration
+ * @param {number} precision        calculation accuracy. Recommended for 1-20
+ * @param {number} recursiveCount   Recursive count
  */
 
 
-function abstractBezierCurveToPolyline(bezierCurve, precision) {
+function convertBezierCurveToPolyline(bezierCurve, precision, recursiveCount) {
   if (precision === void 0) {
     precision = 5;
+  }
+
+  if (recursiveCount === void 0) {
+    recursiveCount = 0;
   }
 
   var getSegmentTPointFuns = createGetSegmentTPointFuns(bezierCurve);
   var segmentPoints = createSegmentPoints(getSegmentTPointFuns); // Calculate uniformly distributed points by iteratively
 
-  var polyline = calcUniformPointsByIteration(segmentPoints, getSegmentTPointFuns, precision);
+  var polyline = calcUniformPointsByIteration(segmentPoints, getSegmentTPointFuns, precision, recursiveCount);
   var endPoint = getBezierCurveEndPoint(bezierCurve);
   polyline.push(endPoint);
   return polyline;
 }
 /**
- * @description Get the polyline corresponding to the Bezier curve
- * @param {BezierCurve} bezierCurve BezierCurve data
- * @param {Number} precision  Calculation accuracy. Recommended for 1-20. Default = 5
- * @return {Array|null} Point data that constitutes a polyline after calculation (Invalid input will return null)
+ * @description Transform bezierCurve to polyline
+ * @param {BezierCurve} bezierCurve bezier curve
+ * @param {number} precision        Wanted precision (Not always achieveable)
+ * @param {number} recursiveCount   Recursive count
  */
 
 
-function bezierCurveToPolyline(bezierCurve, precision) {
+function bezierCurveToPolyline(bezierCurve, precision, recursiveCount) {
   if (precision === void 0) {
     precision = 5;
   }
 
-  if (!bezierCurve) return null;
-  if (!(bezierCurve instanceof Array)) return null;
-  if (bezierCurve.length <= 1) return null;
-  if (typeof precision !== 'number') return null;
-  return abstractBezierCurveToPolyline(bezierCurve, precision);
+  if (recursiveCount === void 0) {
+    recursiveCount = 0;
+  }
+
+  if (!(bezierCurve instanceof Array)) throw new Error("bezierCurveToPolyline: Invalid input of " + bezierCurve);
+  if (bezierCurve.length <= 1) throw new Error("bezierCurveToPolyline: The length of the bezierCurve should be greater than 1");
+  if (typeof precision !== 'number') throw new Error("bezierCurveToPolyline: Type of precision must be number");
+  return convertBezierCurveToPolyline(bezierCurve, precision, recursiveCount);
 }
-/**
- * @description Get the bezier curve length
- * @param {Array} bezierCurve bezierCurve data
- * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
- * @return {Number|Boolean} BezierCurve length (Invalid input will return false)
- */
-
-function getBezierCurveLength(bezierCurve, precision) {
+function getBezierCurveLength(bezierCurve, precision, recursiveCount) {
   if (precision === void 0) {
     precision = 5;
   }
 
-  var polyline = bezierCurveToPolyline(bezierCurve, precision);
-  if (polyline) return null; // Calculate the total length of the points that make up the polyline
+  if (recursiveCount === void 0) {
+    recursiveCount = 0;
+  }
 
+  var polyline = bezierCurveToPolyline(bezierCurve, precision, recursiveCount);
   var pointsDistance = getPointsDistance(polyline);
-  return getNumsSum(pointsDistance);
+  return getNumSum(pointsDistance);
 }
 
 /**
  * @description Get the control points of the Bezier curve
- * @param {Array} polyline A set of points that make up a polyline
- * @param {Number} index   The index of which get controls points's point in polyline
- * @param {Boolean} close  Closed curve
- * @param {Number} offsetA Smoothness
- * @param {Number} offsetB Smoothness
- * @return {Array} Control points
+ * @param {Point[]} polyline A set of points that make up a polyline
+ * @param {number} index   The index of which get controls points's point in polyline
+ * @param {boolean} close  Closed curve
+ * @param {number} offsetA Smoothness
+ * @param {number} offsetB Smoothness
+ * @return {Point[]|null} Control points
  */
 
 function getBezierCurveLineControlPoints(polyline, index, close, offsetA, offsetB) {
@@ -349,26 +336,23 @@ function getBezierCurveLineControlPoints(polyline, index, close, offsetA, offset
 }
 /**
  * @description Get the symmetry point
- * @param {Array} point       Symmetric point
- * @param {Array} centerPoint Symmetric center
- * @return {Array} Symmetric point
+ * @param {Point} point       Symmetric point
+ * @param {Point} centerPoint Symmetric center
+ * @return {Point} Symmetric point
  */
 
 
-function getSymmetryPoint(point, centerPoint) {
-  var px = point[0],
-      py = point[1];
-  var cx = centerPoint[0],
-      cy = centerPoint[1];
+function getSymmetryPoint(_a, _b) {
+  var px = _a[0],
+      py = _a[1];
+  var cx = _b[0],
+      cy = _b[1];
   var minusX = cx - px;
   var minusY = cy - py;
   return [cx + minusX, cy + minusY];
 }
 /**
  * @description Get the last curve of the closure
- * @param {Array} bezierCurve A set of sub-curve
- * @param {Array} startPoint  Start point
- * @return {Array} The last curve for closure
  */
 
 
@@ -379,12 +363,12 @@ function closeBezierCurve(bezierCurve, startPoint) {
   return bezierCurve;
 }
 /**
- * @description Abstract the polyline formed by N points into a set of bezier curve
- * @param {Array} polyline A set of points that make up a polyline
- * @param {Boolean} close  Closed curve
- * @param {Number} offsetA Smoothness
- * @param {Number} offsetB Smoothness
- * @return {Array|Boolean} A set of bezier curve (Invalid input will return false)
+ * @description Convert polyline to bezierCurve
+ * @param {Point[]} polyline A set of points that make up a polyline
+ * @param {boolean} close    Closed curve
+ * @param {number} offsetA   Smoothness
+ * @param {number} offsetB   Smoothness
+ * @return {BezierCurve} A set of bezier curve (Invalid input will return false)
  */
 
 
@@ -401,8 +385,8 @@ function polylineToBezierCurve(polyline, close, offsetA, offsetB) {
     offsetB = 0.25;
   }
 
-  if (!(polyline instanceof Array)) return null;
-  if (polyline.length <= 2) return null;
+  if (!(polyline instanceof Array)) throw new Error("polylineToBezierCurve: Invalid input of " + polyline);
+  if (polyline.length <= 2) throw new Error("polylineToBezierCurve: The length of the polyline should be greater than 2");
   var startPoint = polyline[0];
   var bezierCurveLineNum = polyline.length - 1;
   var bezierCurvePoints = new Array(bezierCurveLineNum).fill(0).map(function (_, i) {

@@ -24,7 +24,7 @@ function getBezierCurveSegments(bezierCurve: BezierCurve): BezierCurveSegment[] 
 /**
  * @description Get the sum of the {number[]}
  */
-function getNumsSum(nums: number[]): number {
+function getNumSum(nums: number[]): number {
   return nums.reduce((sum, num) => sum + num, 0)
 }
 
@@ -35,11 +35,8 @@ function getTwoPointDistance([ax, ay]: Point, [bx, by]: Point): number {
   return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2))
 }
 
-/**
- * @description Transform {Point[][]} to {Point[]}
- */
-function mergeSegmentPoints(segmentPoints: Point[][]): Point[] {
-  return segmentPoints.reduce((_, __) => [..._, ...__], [])
+function flatten<T>(input: T[][]): T[] {
+  return input.reduce((_, __) => [..._, ...__], [])
 }
 
 /**
@@ -141,17 +138,17 @@ function getSegmentPointsDistance(segmentPoints: Point[][]): number[][] {
 function getAllDeviations(segmentPointsDistance: number[][], avgLength: number): number {
   const calcDeviation = (distance: number[]): number[] => distance.map(d => Math.abs(d - avgLength))
 
-  return getNumsSum(segmentPointsDistance.map(calcDeviation).map(getNumsSum))
+  return getNumSum(segmentPointsDistance.map(calcDeviation).map(getNumSum))
 }
 
 function getSegmentPointsData(segmentPoints: Point[][]): SegmentPointsData {
   const segmentPointsDistance = getSegmentPointsDistance(segmentPoints)
 
-  const lineSegmentNum = getNumsSum(segmentPointsDistance.map(({ length }) => length))
+  const lineSegmentNum = getNumSum(segmentPointsDistance.map(({ length }) => length))
 
-  const segmentLength = segmentPointsDistance.map(getNumsSum)
+  const segmentLength = segmentPointsDistance.map(getNumSum)
 
-  const totalLength = getNumsSum(segmentLength)
+  const totalLength = getNumSum(segmentLength)
 
   const avgDistance = totalLength / lineSegmentNum
   const deviation = getAllDeviations(segmentPointsDistance, avgDistance)
@@ -165,7 +162,7 @@ function getSegmentPointsData(segmentPoints: Point[][]): SegmentPointsData {
 }
 
 function getSegmentPointsCount(segmentPoints: Point[][]): number {
-  return mergeSegmentPoints(segmentPoints).length
+  return flatten(segmentPoints).length
 }
 
 function reGetSegmentPoints(
@@ -180,9 +177,10 @@ function reGetSegmentPoints(
   pointsCount = Math.ceil((avgDistance / precision) * pointsCount * 1.1)
 
   // Redistribution points acount
-  const segmentPointsNum = segmentLength.map(length =>
-    Math.ceil((length / totalLength) * pointsCount)
-  )
+  const segmentPointsNum = segmentLength
+    .map(length => Math.ceil((length / totalLength) * pointsCount))
+    // At least need two points
+    .map(_ => (_ > 1 ? _ : 2))
 
   // Calculate the points after redistribution
   return getSegmentPointsByNum(getSegmentTPointFuns, segmentPointsNum)
@@ -236,9 +234,10 @@ function calcUniformPointsByIteration(
   precision: number,
   recursiveCount: number
 ): Point[] {
+  console.warn('-------------start-------------')
   let segmentPointsData = getSegmentPointsData(segmentPoints)
 
-  if (segmentPointsData.deviation <= precision) return mergeSegmentPoints(segmentPoints)
+  if (segmentPointsData.deviation <= precision) return flatten(segmentPoints)
 
   segmentPoints = reGetSegmentPoints(
     segmentPoints,
@@ -247,7 +246,7 @@ function calcUniformPointsByIteration(
     precision
   )
 
-  if (recursiveCount <= 0) return mergeSegmentPoints(segmentPoints)
+  if (recursiveCount <= 0) return flatten(segmentPoints)
 
   segmentPointsData = getSegmentPointsData(segmentPoints)
 
@@ -258,7 +257,7 @@ function calcUniformPointsByIteration(
     recursiveCount
   )
 
-  return mergeSegmentPoints(segmentPoints)
+  return flatten(segmentPoints)
 }
 
 /**
@@ -294,9 +293,9 @@ function convertBezierCurveToPolyline(
 
 /**
  * @description Transform bezierCurve to polyline
- * @param {BezierCurve} bezierCurve Input bezier curve
+ * @param {BezierCurve} bezierCurve bezier curve
  * @param {number} precision        Wanted precision (Not always achieveable)
- * @param {number} recursiveCount
+ * @param {number} recursiveCount   Recursive count
  */
 export function bezierCurveToPolyline(
   bezierCurve: BezierCurve,
@@ -323,7 +322,8 @@ export function getBezierCurveLength(
   const polyline = bezierCurveToPolyline(bezierCurve, precision, recursiveCount)
 
   const pointsDistance = getPointsDistance(polyline!)
-  return getNumsSum(pointsDistance)
+
+  return getNumSum(pointsDistance)
 }
 
 export default bezierCurveToPolyline
