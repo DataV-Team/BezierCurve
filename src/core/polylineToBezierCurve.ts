@@ -90,10 +90,12 @@ function polylineToBezierCurve(
   close = false,
   offsetA = 0.25,
   offsetB = 0.25
-): BezierCurve | null {
-  if (!(polyline instanceof Array)) return null
+): BezierCurve {
+  if (!(polyline instanceof Array))
+    throw new Error(`polylineToBezierCurve: Invalid input of ${polyline}`)
 
-  if (polyline.length <= 2) return null
+  if (polyline.length <= 2)
+    throw new Error(`polylineToBezierCurve: The length of the polyline should be greater than 2`)
 
   const startPoint = polyline[0]
 

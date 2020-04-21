@@ -302,14 +302,15 @@ export function bezierCurveToPolyline(
   bezierCurve: BezierCurve,
   precision = 5,
   recursiveCount = 0
-): Point[] | null {
-  if (!bezierCurve) return null
+): Point[] {
+  if (!(bezierCurve instanceof Array))
+    throw new Error(`bezierCurveToPolyline: Invalid input of ${bezierCurve}`)
 
-  if (!(bezierCurve instanceof Array)) return null
+  if (bezierCurve.length <= 1)
+    throw new Error(`bezierCurveToPolyline: The length of the bezierCurve should be greater than 1`)
 
-  if (bezierCurve.length <= 1) return null
-
-  if (typeof precision !== 'number') return null
+  if (typeof precision !== 'number')
+    throw new Error(`bezierCurveToPolyline: Type of precision must be number`)
 
   return convertBezierCurveToPolyline(bezierCurve, precision, recursiveCount)
 }
@@ -318,9 +319,8 @@ export function getBezierCurveLength(
   bezierCurve: BezierCurve,
   precision = 5,
   recursiveCount = 0
-): number | null {
+): number {
   const polyline = bezierCurveToPolyline(bezierCurve, precision, recursiveCount)
-  if (!polyline) return null
 
   const pointsDistance = getPointsDistance(polyline!)
   return getNumsSum(pointsDistance)
