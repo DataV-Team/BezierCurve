@@ -10,7 +10,7 @@
       <img src="https://img.shields.io/github/license/DataV-Team/beziercurve.svg" alt="LICENSE" />
     </a>
     <a href="https://www.npmjs.com/package/@jiaminghi/bezier-curve">
-      <img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="LICENSE" />
+      <img src="https://img.shields.io/npm/v/@jiaminghi/bezier-curve.svg" alt="NPM" />
     </a>
 </p>
 
