@@ -12,7 +12,7 @@
 
 - **[bezierCurveToPolyline](#bezierCurveToPolyline)**
 
-  将贝塞尔曲线抽象成由N个**均匀分布**的点构成的折线
+  将贝塞尔曲线抽象成由 N 个**均匀分布**的点构成的折线
 
 - **[getBezierCurveLength](#getBezierCurveLength)**
 
@@ -20,9 +20,9 @@
 
 - **[polylineToBezierCurve](#polylineToBezierCurve)**
 
-  将由N个点构成的折线抽象成光滑的贝塞尔曲线
+  将由 N 个点构成的折线抽象成光滑的贝塞尔曲线
 
-### npm安装
+### npm 安装
 
 ```shell
 $ npm install @jiaminghi/bezier-curve
@@ -45,12 +45,12 @@ import bezierCurve from '@jiaminghi/bezier-curve'
 <!--压缩版-->
 <script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.min.js"></script>
 <script>
-    const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.bezierCurve
-    // do something
+  const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.bezierCurve
+  // do something
 </script>
 ```
 
-------
+---
 
 <h3 align="center">示例</h3>
 
@@ -59,15 +59,17 @@ import bezierCurve from '@jiaminghi/bezier-curve'
 ```javascript
 // 贝塞尔曲线数据结构
 const bezierCurve = [
-    // 起始点
-	[20, 20],
-    // 多段贝塞尔曲线
-    [
-        // 控制点1，控制点2，结束点
-        [100, 20],[100, 80],[180,80]
-    ],
-    // 下一段贝塞尔曲线的起始点是上一段的结束点
-    // [...],[...]
+  // 起始点
+  [20, 20],
+  // 多段贝塞尔曲线
+  [
+    // 控制点1，控制点2，结束点
+    [100, 20],
+    [100, 80],
+    [180, 80],
+  ],
+  // 下一段贝塞尔曲线的起始点是上一段的结束点
+  // [...],[...]
 ]
 ```
 
@@ -86,7 +88,7 @@ const bezierCurve = [
  * @param {Number} precision  计算精度 建议5-10 默认为5
  * @return {Array|Boolean} 构成折线的点集 (无效输入将返回false)
  */
-function bezierCurveToPolyline (bezierCurve, precision = 5) {
+function bezierCurveToPolyline(bezierCurve, precision = 5) {
   // ...
 }
 
@@ -108,13 +110,11 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 
 #### Notice
 
-- *bezierCurveToPolyline*的计算结果是由N个点构成的折线，N取决于设置的精度。
-- 理想情况下，计算结果中相邻的两个点的距离等于设置的精度（单位px）。
-- 建议精度5-10。
-- 如果设置的精度过小或过大（小于1或大于10），可能导致计算异常。
+- *bezierCurveToPolyline*的计算结果是由 N 个点构成的折线，N 取决于设置的精度。
+- 理想情况下，计算结果中相邻的两个点的距离等于设置的精度（单位 px）。
+- 建议精度 5-10。
+- 如果设置的精度过小或过大（小于 1 或大于 10），可能导致计算异常。
 - 设置的精度并不是每次都能达到。
-
-
 
 #### getBezierCurveLength
 
@@ -125,7 +125,7 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
  * @param {Number} precision  计算精度 建议5-10 默认为5
  * @return {Number|Boolean} 贝塞尔曲线长度 (无效输入将返回false)
  */
-export function getBezierCurveLength (bezierCurve, precision = 5) {
+export function getBezierCurveLength(bezierCurve, precision = 5) {
   // ...
 }
 
@@ -133,18 +133,16 @@ export function getBezierCurveLength (bezierCurve, precision = 5) {
 const length = bezierCurveToPolyline(bezierCurve)
 ```
 
-
-
 #### polyline
 
 ```javascript
 // 折线数据结构
 const polyline = [
-    [20, 70],
-    [50, 30],
-    [100, 70],
-    [150, 30],
-    [180, 70]
+  [20, 70],
+  [50, 30],
+  [100, 70],
+  [150, 30],
+  [180, 70],
 ]
 ```
 
@@ -153,8 +151,6 @@ const polyline = [
 </p>
 
 <p align="center"><i>polyline</i> in <b>SVG</b></p>
-
-
 
 #### polylineToBezierCurve
 
@@ -167,8 +163,8 @@ const polyline = [
  * @param {Number} offsetB 光滑程度
  * @return {Array|Boolean} 贝塞尔曲线数据 (无效输入将返回false)
  */
-function polylineToBezierCurve (polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
-	// ...
+function polylineToBezierCurve(polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
+  // ...
 }
 
 const bezierCurve = polylineToBezierCurve(polyline)
@@ -203,4 +199,3 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 </p>
 
 <p align="center"><i>closedBezierCurve</i> in <b>SVG</b></p>
-

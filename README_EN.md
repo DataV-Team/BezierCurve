@@ -45,12 +45,12 @@ import { bezierCurveToPolyline } from '@jiaminghi/bezier-curve'
 <!--Compression version-->
 <script src="http://lib.jiaminghi.com/bezierCurve/bezierCurve.min.js"></script>
 <script>
-    const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.bezierCurve
-    // do something
+  const { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } = window.bezierCurve
+  // do something
 </script>
 ```
 
-------
+---
 
 <h3 align="center">Examples</h3>
 
@@ -59,15 +59,17 @@ import { bezierCurveToPolyline } from '@jiaminghi/bezier-curve'
 ```javascript
 // Bezier curve data structure
 const bezierCurve = [
-    // Start point
-	[20, 20],
-    // Multiple sets of bezier curve
-    [
-        // controlPoint1,controlPoint2,endPoint
-        [100, 20],[100, 80],[180,80]
-    ],
-    // The starting point of the next bezier curve is the end point of the previous bezier curve
-    // [...],[...]
+  // Start point
+  [20, 20],
+  // Multiple sets of bezier curve
+  [
+    // controlPoint1,controlPoint2,endPoint
+    [100, 20],
+    [100, 80],
+    [180, 80],
+  ],
+  // The starting point of the next bezier curve is the end point of the previous bezier curve
+  // [...],[...]
 ]
 ```
 
@@ -86,7 +88,7 @@ const bezierCurve = [
  * @param {Number} precision  Calculation accuracy. Recommended for 5-10. Default = 5
  * @return {Array|Boolean} Point data that constitutes a polyline after calculation (Invalid input will return false)
  */
-function bezierCurveToPolyline (bezierCurve, precision = 5) {
+function bezierCurveToPolyline(bezierCurve, precision = 5) {
   // ...
 }
 
@@ -108,13 +110,11 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
 
 #### Notice
 
-- The calculation result of *bezierCurveToPolyline* consists of N points, and N depends on the precision you set.
+- The calculation result of _bezierCurveToPolyline_ consists of N points, and N depends on the precision you set.
 - Ideally, the distance between two adjacent points in the calculation result is equal to the set accuracy (unit px).
 - Recommended precision is 5-10.
 - If the setting precision is less than 1 or too large, the calculation result may be abnormal.
 - Sometimes it is **impossible** to achieve precision.
-
-
 
 #### getBezierCurveLength
 
@@ -125,7 +125,7 @@ const polyline = bezierCurveToPolyline(bezierCurve, precision)
  * @param {Number} precision  calculation accuracy. Recommended for 5-10. Default = 5
  * @return {Number|Boolean} BezierCurve length (Invalid input will return false)
  */
-export function getBezierCurveLength (bezierCurve, precision = 5) {
+export function getBezierCurveLength(bezierCurve, precision = 5) {
   // ...
 }
 
@@ -133,18 +133,16 @@ export function getBezierCurveLength (bezierCurve, precision = 5) {
 const length = bezierCurveToPolyline(bezierCurve)
 ```
 
-
-
 #### polyline
 
 ```javascript
 // polyline data structure
 const polyline = [
-    [20, 70],
-    [50, 30],
-    [100, 70],
-    [150, 30],
-    [180, 70]
+  [20, 70],
+  [50, 30],
+  [100, 70],
+  [150, 30],
+  [180, 70],
 ]
 ```
 
@@ -153,8 +151,6 @@ const polyline = [
 </p>
 
 <p align="center"><i>polyline</i> in <b>SVG</b></p>
-
-
 
 #### polylineToBezierCurve
 
@@ -167,8 +163,8 @@ const polyline = [
  * @param {Number} offsetB Smoothness
  * @return {Array|Boolean} A set of bezier curve (Invalid input will return false)
  */
-function polylineToBezierCurve (polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
-	// ...
+function polylineToBezierCurve(polyline, close = false, offsetA = 0.25, offsetB = 0.25) {
+  // ...
 }
 
 const bezierCurve = polylineToBezierCurve(polyline)
@@ -203,4 +199,3 @@ const closedBezierCurve = polylineToBezierCurve(polyline, true)
 </p>
 
 <p align="center"><i>closedBezierCurve</i> in <b>SVG</b></p>
-

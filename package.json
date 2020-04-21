@@ -1,5 +1,5 @@
 {
-  "name": "@jiaminghi/bezier-curve",
+  "name": "@jiaminghi/bezier-curve-dev",
   "version": "0.0.9",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Bezier curve extension",
@@ -9,10 +9,21 @@
     "url": "https://github.com/DataV-Team/BezierCurve.git"
   },
   "scripts": {
-    "build": "node build/index.js",
-    "prepublish": "npm run build",
-    "deploy": "node deploy/index.js",
-    "test": "mocha"
+    "clean": "rimraf lib dist es types",
+    "type:check": "tsc --noEmit",
+    "lint": "eslint --ext js,ts src test",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "build": "rollup -c",
+    "prepare": "npm run clean && npm run check && npm run build",
+    "test": "mocha",
+    "check": "npm run type:check && npm run lint && npm run format:check && npm run test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run check",
+      "pre-push": "npm run check"
+    }
   },
   "license": "MIT",
   "bugs": {
@@ -25,20 +36,33 @@
     "length"
   ],
   "homepage": "https://github.com/DataV-Team/BezierCurve#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.5.5",
-    "@babel/register": "^7.4.4",
-    "@jiaminghi/fs": "^0.0.2",
-    "browserify": "^16.5.0",
-    "chai": "^4.2.0",
-    "ftp": "^0.3.10",
-    "mocha": "^6.1.4",
-    "uglifyjs": "^2.4.11"
-  },
   "dependencies": {
     "@babel/runtime": "^7.5.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.6",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
+    "mocha": "^6.2.3",
+    "prettier": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
   }
 }

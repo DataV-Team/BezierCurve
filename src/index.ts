@@ -7,5 +7,5 @@ export { default as polylineToBezierCurve } from './core/polylineToBezierCurve'
 export default {
   bezierCurveToPolyline,
   getBezierCurveLength,
-  polylineToBezierCurve
+  polylineToBezierCurve,
 }

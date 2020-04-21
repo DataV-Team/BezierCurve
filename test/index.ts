@@ -1,22 +1,20 @@
-const { expect } = require('chai')
+import { expect } from 'chai'
+import { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve } from '../src/index'
+import { BezierCurve } from '../src/types'
 
-const {
-  bezierCurveToPolyline,
-  getBezierCurveLength,
-  polylineToBezierCurve
-} = require('../src/index')
-
-const bezierCurve = [
+const bezierCurve: BezierCurve = [
   [20, 20],
   [
-    [100, 20],[100, 80],[180,80]
-  ]
+    [100, 20],
+    [100, 80],
+    [180, 80],
+  ],
 ]
 
 const polylinePrecision5 = bezierCurveToPolyline(bezierCurve)
 const polylinePrecision10 = bezierCurveToPolyline(bezierCurve, 10)
 
-function findNaNInArray (arr) {
+function findNaNInArray(arr): boolean {
   return arr.findIndex(n => !Number.isFinite(n)) !== -1
 }
 

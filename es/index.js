@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -417,7 +413,5 @@ var index = {
   polylineToBezierCurve: polylineToBezierCurve
 };
 
-exports.bezierCurveToPolyline = bezierCurveToPolyline;
-exports.default = index;
-exports.getBezierCurveLength = getBezierCurveLength;
-exports.polylineToBezierCurve = polylineToBezierCurve;
+export default index;
+export { bezierCurveToPolyline, getBezierCurveLength, polylineToBezierCurve };

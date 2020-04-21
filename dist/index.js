@@ -1,6 +1,8 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
+(function (global, factory) {
+typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+typeof define === 'function' && define.amd ? define(['exports'], factory) :
+(global = global || self, factory(global.BezierCurve = {}));
+}(this, (function (exports) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -421,3 +423,7 @@ exports.bezierCurveToPolyline = bezierCurveToPolyline;
 exports.default = index;
 exports.getBezierCurveLength = getBezierCurveLength;
 exports.polylineToBezierCurve = polylineToBezierCurve;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
