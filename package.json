@@ -4,6 +4,9 @@
   "author": "JiaMing <743192023@qq.com>",
   "description": "Bezier curve extension",
   "main": "lib/index.js",
+  "unpkg": "dist/index.js",
+  "module": "es/index.js",
+  "types": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataV-Team/BezierCurve.git"
