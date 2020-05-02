@@ -1,3 +1,9 @@
+# 1.0.0 (2020-05-02)
+
+### Perfect
+
+- **typescript:** Rewrite with typescript.
+
 # 0.0.9-alpha (2019-08-28)
 
 ### Perfect
