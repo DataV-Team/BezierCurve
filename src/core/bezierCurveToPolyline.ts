@@ -234,7 +234,6 @@ function calcUniformPointsByIteration(
   precision: number,
   recursiveCount: number
 ): Point[] {
-  console.warn('-------------start-------------')
   let segmentPointsData = getSegmentPointsData(segmentPoints)
 
   if (segmentPointsData.deviation <= precision) return flatten(segmentPoints)

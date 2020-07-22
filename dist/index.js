@@ -225,7 +225,6 @@ function recursiveCalcSegmentPoints(segmentPoints, getSegmentTPointFuns, _a, rec
 }
 
 function calcUniformPointsByIteration(segmentPoints, getSegmentTPointFuns, precision, recursiveCount) {
-  console.warn('-------------start-------------');
   var segmentPointsData = getSegmentPointsData(segmentPoints);
   if (segmentPointsData.deviation <= precision) return flatten(segmentPoints);
   segmentPoints = reGetSegmentPoints(segmentPoints, getSegmentTPointFuns, segmentPointsData, precision);
