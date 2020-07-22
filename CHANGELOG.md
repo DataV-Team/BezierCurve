@@ -1,3 +1,9 @@
+# 1.0.1 (2020-07-22)
+
+### Perfect
+
+- **Perfect:** Remove useless debug output.
+
 # 1.0.0 (2020-05-02)
 
 ### Perfect

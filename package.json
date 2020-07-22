@@ -1,6 +1,6 @@
 {
   "name": "@jiaminghi/bezier-curve",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Bezier curve extension",
   "main": "lib/index.js",
